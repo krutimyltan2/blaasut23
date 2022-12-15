@@ -6,8 +6,8 @@ f = open("public_key.bin", "rb")
 public_key = f.read()
 f.close()
 
-public_files=["server.py", "public_key.bin", "leslie.py", "signer.py", "verifier.py"]
-private_files=["flagga.txt"]
+public_files={"server.py", "public_key.bin", "leslie.py", "signer.py", "verifier.py"}
+private_files={"flagga.txt"}
 
 @app.route("/", methods=["GET"])
 def get_public_files():
@@ -41,7 +41,7 @@ def upload_trusted_list():
         for filename in split_msg:
             s_filename = filename.decode()
             if (not s_filename in public_files) and (s_filename in private_files):
-                public_files.append(s_filename)
+                public_files.add(s_filename)
                 private_files.remove(s_filename)
 
 if __name__ == '__main__':
