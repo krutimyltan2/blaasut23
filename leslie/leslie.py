@@ -1,10 +1,9 @@
-import secrets
-import hashlib
-
 """
 Implementation av Leslie-signaturer.
 Se https://en.wikipedia.org/wiki/Lamport_signature för mer information.
 """
+import secrets
+import hashlib
 
 SHA3_512_DIGEST_LEN_BITS = 512
 SHA3_512_DIGEST_LEN_BYTES = (SHA3_512_DIGEST_LEN_BITS//8)
@@ -43,14 +42,14 @@ def sign(msg, private_key):
 
 def verify(msg, signature, public_key):
     js = get_js(msg)
-    assert(len(js) == k)
+    if(len(js) != k):
+        return False
     for i in range(k):
         j = js[i]
         f_y_ij = signature[i*F_LEN_BYTES : (i+1)*F_LEN_BYTES]
         if f_y_ij != public_key[(2*i + j)*F_LEN_BYTES : (2*i + j + 1)*F_LEN_BYTES]:
             return False
     return True
-
 
 if __name__ == "__main__":
     private_key = generate_private_key()
