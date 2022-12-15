@@ -1,5 +1,0 @@
-Vi har nu uppdaterat från de gamla RSASSA-PSS-signaturerna för
-signeringen av binärerna till något kvantsäkert som heter
-Leslie-signaturer. Jag vet inte riktigt hur det fungerar, men
-det verkade ganska säkert så länge man inte återanvänder samma
-nyckel.
