@@ -1,5 +1,7 @@
 """
-Implementation av Leslie-signaturer.
+Implementation av Leslie-signaturer. Om vi använder det här är vi
+kvantsäkra, till skillnad från RSASSA-PSS som vi använde tidigare.
+
 Se https://en.wikipedia.org/wiki/Lamport_signature för mer information.
 """
 import secrets
@@ -33,12 +35,12 @@ def sign(msg, private_key):
     assert(len(msg) == k//8)
     js = get_js(msg)
     assert(len(js) == k)
-    sign = b""
+    signa = b""
     for i in range(k):
         j = js[i]
         y_ij = private_key[2*i + j : 2*i + j + 1]
-        sign += f(y_ij)
-    return sign
+        signa += f(y_ij)
+    return signa
 
 def verify(msg, signature, public_key):
     js = get_js(msg)
@@ -50,10 +52,3 @@ def verify(msg, signature, public_key):
         if f_y_ij != public_key[(2*i + j)*F_LEN_BYTES : (2*i + j + 1)*F_LEN_BYTES]:
             return False
     return True
-
-if __name__ == "__main__":
-    private_key = generate_private_key()
-    public_key = generate_public_key(private_key)
-    msg = f(b"hello_world")
-    s = sign(msg, private_key)
-    print(verify(msg, s, public_key))
