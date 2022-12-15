@@ -1,0 +1,4 @@
+Administratören har skrivit följande notis på en lapp på sitt
+skrivbord: "Kaj Paj sa igår att jag borde uppdatera hashfunktionen, men
+jag orkar inte. Mitt lösenord är ändå 70 tecken långt så det lär nog
+ingen knäcka även om de har hashen av det."
